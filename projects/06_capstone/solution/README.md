@@ -1,0 +1,5 @@
+# Reference decision record
+
+Use deterministic Python coordination for this small fixed workflow: it bounds calls and applies the refund gate outside any model. Independent data services return explicit evidence; the separate bridge exercises a real local MCP connection, while an SDK agent for bounded research is not demonstrated by this simulation. Do not treat service text as instructions. Missing data, budget exhaustion and conflicting evidence become a local human handoff; no actual refund or outbound message occurs. Full citations carry IDs and dates, while partial coverage remains explicit. This design spends at most two calls on the normal path and avoids model cost; adding live agents would add latency, cost and nondeterminism. Human review is still needed to resolve conflict, assess source quality and authorize a real-world action.
+
+The reference bridge uses the P3 server’s real tool and resource, and treats the undated human-review policy and unknown eligibility as insufficient evidence for authorization. It returns escalation instead of manufacturing dates or permissions.

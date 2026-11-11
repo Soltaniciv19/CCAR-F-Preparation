@@ -1,0 +1,4 @@
+[
+  {"id":"policy-2026-01","date":"2026-01-01","refund_allowed":true,"text":"Synthetic policy: eligible orders may be refunded."},
+  {"id":"policy-conflict","date":"2026-02-01","refund_allowed":false,"text":"Synthetic conflicting evidence for escalation practice."}
+]
