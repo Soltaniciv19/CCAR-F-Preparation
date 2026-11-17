@@ -1,0 +1,26 @@
+[
+  {
+    "id": "P1",
+    "filename": "CCAR_F_Domain_1_Agentic_Architecture_Masterclass.pdf",
+    "pages": 56,
+    "sha256": "1d52c81d2486a12a97a93f96a40c743fcd2fcd0bc13c957b32ffd0b622bf7ce0"
+  },
+  {
+    "id": "P2",
+    "filename": "CCAR_F_Domain_2_Tool_Design_MCP_Study_Guide.pdf",
+    "pages": 30,
+    "sha256": "1cec73c9d9a7df11d4f93bf2617ce967986005532bcc2f78913221e1e9df15ba"
+  },
+  {
+    "id": "P4",
+    "filename": "Claude_Certified_Architect_Domain_4_Study_Guide.pdf",
+    "pages": 38,
+    "sha256": "c3d9fe5e983b1ddae711a8f4073ce0dae36fd54ee4e9f78c18a83192bced2342"
+  },
+  {
+    "id": "P5",
+    "filename": "Claude_Architect_Foundations_Domain_5_Study_Guide.pdf",
+    "pages": 34,
+    "sha256": "a85870f9aa5d8a8d09440cee87096708860472f923af10c3bf15ecd76a8de017"
+  }
+]

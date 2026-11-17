@@ -1,5 +1,0 @@
-[
-  {"id":"r1","text":"Maple Books | total USD 12.50","merchant":"Maple Books","amount_cents":1250},
-  {"id":"r2","text":"North Cafe | total USD 8.00","merchant":"North Cafe","amount_cents":800},
-  {"id":"r3","text":"Store unreadable | total USD 9.00","merchant":null,"amount_cents":900}
-]

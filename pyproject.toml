@@ -3,27 +3,30 @@ requires = ["setuptools>=75"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ccar-course"
-version = "0.1.0"
-description = "Offline-first Claude architecture practice course"
+name = "ccarf-study"
+version = "1.0.0"
+description = "A Python-first CCAR-F study course and executable architecture workbook"
 requires-python = ">=3.11"
 dependencies = []
 
 [project.optional-dependencies]
-dev = ["pytest==8.4.2", "ruff==0.14.10", "mcp==2.3.0"]
-live = ["anthropic==2.8.0", "claude-agent-sdk==0.2.180"]
+sdk = ["anthropic==2.10.0", "claude-agent-sdk==0.2.183", "mcp==2.3.0", "pydantic==2.14.3"]
+dev = ["pytest==9.2.0", "ruff==0.17.5"]
 
 [tool.setuptools.packages.find]
-where = ["src"]
+include = ["ccarf*"]
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
-markers = ["live: opt-in tests that may call paid services"]
-addopts = "-m 'not live'"
+testpaths = ["verification"]
+pythonpath = ["."]
 
 [tool.ruff]
-target-version = "py311"
 line-length = 100
+target-version = "py311"
 
 [tool.ruff.lint]
-select = ["E4", "E7", "E9", "F"]
+select = ["E4", "E7", "E9", "F", "I", "UP", "B"]
+
+[tool.ruff.lint.per-file-ignores]
+"domains/*/solution.py" = ["E402"]
+"examples/launch_mcp.py" = ["E402"]

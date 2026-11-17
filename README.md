@@ -1,33 +1,65 @@
-# Claude architecture study course
+# CCAR-F: Python architecture study repository
 
-An offline-first, self-paced Python course for practicing architecture patterns relevant to Claude Certified Architect — Foundations. Start with the five domains, then build through the projects. The exercises and questions are original practice; they are not exam questions, an official exam guide, or a certification guarantee. See [sources and maintenance](docs/sources.md) for the community domain weights and current product documentation.
+A self-contained learning path for **Claude Certified Architect - Foundations (CCAR-F)**. It combines the four supplied study PDFs with a newly written Domain 3 and official Anthropic/MCP documentation checked on **17 November 2026**. This is independent study material. All practice questions are original, with one best answer; they are not recalled exam items.
 
-## Setup
+## Start here
 
-You need Python 3.11 or newer, Git familiarity, and a terminal. The examples use synthetic data. In a shell from this directory:
+1. Read [setup](docs/SETUP.md) and [the learning plan](STUDY_PLAN.md).
+2. Follow Domains 1 through 5. In each folder read `THEORY.md`, complete `EXERCISES.md`, then answer `QUESTIONS.md` before opening `ANSWERS_AND_SOLUTIONS.md`.
+3. Run the Python implementations, change a design assumption, and inject the failures specified in each lab.
+4. Complete the [integrated capstone](capstone/README.md), then the [60-question practice exam](practice-exam/EXAM.md).
+5. Use the [coverage map](CURRICULUM_MAP.md) and [progress tracker](PROGRESS.md) to revisit weak objectives.
 
-```sh
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -e '.[dev]'
-python scripts/check.py
+## Domains
+
+| Domain | Weight | Learning material | Main implementation |
+|---|---:|---|---|
+| 1. Agentic Architecture & Orchestration | 27% | [Domain 1](domains/01-agentic-architecture/README.md) | [Protocol loop and refund gate](ccarf/architecture.py) |
+| 2. Tool Design & MCP Integration | 18% | [Domain 2](domains/02-tool-design-mcp/README.md) | [Contracts, dispatch and recovery](ccarf/tools.py) |
+| 3. Claude Code Configuration & Workflows | 20% | [Domain 3](domains/03-claude-code/README.md) | [CLI review adapter](ccarf/workflows.py) |
+| 4. Prompt Engineering & Structured Output | 20% | [Domain 4](domains/04-prompting-structured-output/README.md) | [Evidence and arithmetic validators](ccarf/extraction.py) |
+| 5. Context Management & Reliability | 15% | [Domain 5](domains/05-context-reliability/README.md) | [Provenance, routing and persistence](ccarf/reliability.py) |
+
+Each domain contains theory, four build/design exercises, 20 scenario questions, an explained answer key, and implementation guidance. The separate full practice exam contains another 60 questions. See [Anthropic SDK guide](docs/ANTHROPIC_SDK.md) for live Messages, streaming, structured output, tool loops, batch, Agent SDK, hooks and sessions examples.
+
+## Run without API access
+
+Python 3.11+ is sufficient for the offline code. Run from this repository's root:
+
+```bash
+python3 -m examples.offline_demo
+python3 -m capstone.solution
+python3 -m unittest discover -s verification -v
+python3 scripts/check_repository.py
 ```
 
-On Windows activate with `.venv\Scripts\activate`. `uv.lock` records a reproducible dependency resolution; with [uv](https://docs.astral.sh/uv/), use `uv sync --locked --extra dev` instead of the first three commands, then `uv run --locked --extra dev python scripts/check.py`. Direct dependencies are pinned in `pyproject.toml`; the lock also records transitive versions. Installing packages requires network access, but the default checks do not call a model or external service. See [troubleshooting](docs/troubleshooting.md).
+For SDK examples and development tools, create a separate environment:
 
-For interactive tutoring, install and authenticate [Claude Code](https://code.claude.com/docs/en/overview), then start `claude --model haiku` here if that alias is available to your account. Inspect `/status` or `/model` for the active selection. The tutor follows [CLAUDE.md](CLAUDE.md); `/study` and `/review` are project skills. Instructions influence behavior but do not replace permissions. They ask the tutor not to reveal solutions without a request.
+```bash
+uv venv .venv-study --python 3.12
+uv pip install --python .venv-study/bin/python -e '.[sdk,dev]'
+source .venv-study/bin/activate
+```
 
-Python API/Agent SDK calls use separate credentials and model configuration. They may incur charges and are not included by assumption in a Claude Code subscription. `.env.example` lists environment variable names only and is not automatically loaded. Never paste secrets into chat or commit `.env`. Optional SDK dependencies can be installed with `python -m pip install -e '.[live]'`. Choose a currently supported model ID and consult [pricing](https://platform.claude.com/docs/en/about-claude/pricing) and your provider dashboard before opting into a live call. The default checks never require credentials. Model availability, provider authentication and CLI behavior can change.
+Live examples make paid API calls only when explicitly run. They read `ANTHROPIC_API_KEY` and require an explicit `ANTHROPIC_MODEL`; no credentials are included. No API calls are necessary to complete the theory, offline labs or assessments.
 
-## Learning path
+## How to use the sources
 
-1. [P0: setup and baseline](course/00_setup/README.md).
-2. [D1: agent architecture](course/01_agent_architecture/README.md), [D2: tools and MCP](course/02_tools_and_mcp/README.md), [D3: Claude Code](course/03_claude_code/README.md), [D4: prompting and output](course/04_prompting_and_output/README.md), and [D5: context and reliability](course/05_context_and_reliability/README.md).
-3. [P1: Messages agent](projects/01_messages_agent/README.md), [P2: Agent SDK orchestration](projects/02_agent_sdk/README.md), [P3: MCP](projects/03_mcp/README.md), [P4: Claude Code workshop](projects/04_claude_code_workshop/README.md), [P5: extraction and review](projects/05_extraction_and_review/README.md), and [P6: capstone](projects/06_capstone/README.md).
-4. Take the [practice sets](assessments/README.md), revisit weak areas and record evidence and reflections in [progress.md](progress.md).
+The [source register](docs/SOURCES.md) identifies all supplied PDFs and the official references. The PDFs remain in Downloads; the repository contains original explanations and code rather than redistributed PDFs. Domain 3 is sourced from the official blueprint, Claude Code documentation, and verified SDK behavior.
 
-Each lesson states its own commands, requirements and constraints. Starters are deliberately incomplete; their checks can fail until you implement them. Reference solutions and answer keys are separate. The root check runs reference and integration tests, not learner attempts. For example, from the root, run `python -m pytest course/01_agent_architecture/tests -q` for your D1 attempt and `COURSE_REFERENCE=1 python -m pytest course/01_agent_architecture/tests -q` for its reference. Project READMEs specify workspace or `PYTHONPATH` selection and reset instructions. Save your work before resetting; the P4 sandbox creator refuses to overwrite an existing directory.
+Distinguish the **exam's architectural concepts** from a particular SDK release. Tool names, forced tool selection, hook fields, model support and settings defaults can change. [Compatibility notes](docs/COMPATIBILITY.md) record the checked versions and important differences. A schema-valid result still requires source and policy validation.
 
-## Working safely and evaluating progress
+## Repository layout
 
-No default example sends external messages, processes real refunds, or uses production data. Treat model output and retrieved text as untrusted data; validate inputs and enforce authorization in code. Simulated adapters demonstrate control flow, not real model quality. Local tests establish only the cases they cover. For readiness, complete the core exercises, explain the trade-offs and failure paths independently, review weak areas and use a self-selected target on multiple practice sets. See the [glossary](docs/glossary.md) and [project rubric](assessments/README.md).
+```text
+domains/           Five independent study folders; solutions are separated
+ccarf/             Reusable, offline Python reference implementations
+examples/          Runnable offline demo and optional live SDK integrations
+capstone/          Integrated support-system design and implementation
+practice-exam/     Unseen mixed-domain practice questions and separate key
+docs/              Setup, SDK reference, sources, glossary and revision sheet
+verification/      Behavioral and SDK-contract checks
+scripts/           Repository integrity checks
+```
+
+See [validation results](docs/VALIDATION.md) for the checks run on the course and the limits of offline verification.
